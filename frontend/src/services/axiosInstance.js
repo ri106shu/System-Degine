@@ -1,11 +1,27 @@
 import axios from 'axios';
 
-// withCredentials is what lets the browser send/receive the httpOnly auth
-// cookie. The JWT itself is never touched by JS, on purpose.
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL || '/api',
   withCredentials: true,
-  headers: { 'Content-Type': 'application/json' },
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
+
+// Handle authentication errors centrally
+axiosInstance.interceptors.response.use(
+  (response) => response,
+
+  (error) => {
+    if (error.response?.status === 401) {
+      console.warn(
+        'Authentication required:',
+        error.response?.data?.message || 'Session expired'
+      );
+    }
+
+    return Promise.reject(error);
+  }
+);
 
 export default axiosInstance;
