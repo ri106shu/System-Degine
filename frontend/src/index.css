@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+/* Class-based dark mode: toggling `.dark` on <html> flips every dark: variant. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Light mode (default) */
+  --color-base: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F1F2F4;
+  --color-border: #E4E6EA;
+  --color-border-strong: #D0D3D9;
+
+  --color-text-primary: #16181D;
+  --color-text-secondary: #565B66;
+  --color-text-faint: #8A8F99;
+
+  --color-toggle-off: #6E7480;
+
+  --color-accent: #EA6510;
+  --color-accent-hover: #C9530A;
+  --color-accent-soft: #FCE9DA;
+
+  --color-success: #1F8A57;
+  --color-success-soft: #DFF3E8;
+  --color-danger: #DC3D3D;
+  --color-danger-soft: #FBE4E4;
+  --color-warning: #B4790A;
+  --color-warning-soft: #FBEEDA;
+  --color-info: #2563A8;
+  --color-info-soft: #E1EDF9;
+}
+
+.dark {
+  --color-base: #0B0D10;
+  --color-surface: #14171C;
+  --color-surface-2: #1B1F26;
+  --color-border: #262B33;
+  --color-border-strong: #363C46;
+
+  --color-text-primary: #E9EAEC;
+  --color-text-secondary: #A3A8B3;
+  --color-text-faint: #6B7280;
+
+  --color-toggle-off: #7A8499;
+
+  --color-accent: #F2751A;
+  --color-accent-hover: #FF9142;
+  --color-accent-soft: #2B1B0E;
+
+  --color-success: #3FCB8C;
+  --color-success-soft: #12291F;
+  --color-danger: #F16767;
+  --color-danger-soft: #2E1616;
+  --color-warning: #E8A83D;
+  --color-warning-soft: #2C2110;
+  --color-info: #5B9BE0;
+  --color-info-soft: #14232F;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-base);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background-color: var(--color-accent);
+    color: white;
+  }
+  /* Visible keyboard focus everywhere, without adding a ring to mouse clicks */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "interviewforge",
+  "private": true,
+  "version": "1.0.0",
+  "description": "InterviewForge \u2014 interview preparation tracker (MERN)",
+  "scripts": {
+    "install:all": "npm install --prefix frontend && npm install --prefix backend",
+    "dev": "concurrently -n FRONTEND,BACKEND -c blue,green \"npm run dev --prefix frontend\" \"npm run dev --prefix backend\"",
+    "seed": "npm run seed --prefix backend",
+    "build": "npm run build --prefix frontend"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.5"
+  }
+}
