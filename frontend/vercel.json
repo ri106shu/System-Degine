@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://system-degine.onrender.com/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
